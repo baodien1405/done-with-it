@@ -1,9 +1,11 @@
 import React from "react";
 import { Image, View, StyleSheet, TouchableHighlight } from "react-native";
-import colors from "../config/colors";
-import AppText from "./AppText";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+
+import Text from "../Text";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import colors from "../../config/colors";
 
 function ListItem({
   image,
@@ -21,11 +23,20 @@ function ListItem({
             {IconComponent}
             {image && <Image style={styles.image} source={image} />}
             <View style={styles.detailsContainer}>
-              <AppText style={styles.title}>{title}</AppText>
+              <Text style={styles.title} numberOfLines={1}>
+                {title}
+              </Text>
               {subTitle && (
-                <AppText style={styles.subTitle}>{subTitle}</AppText>
+                <Text style={styles.subTitle} numberOfLines={2}>
+                  {subTitle}
+                </Text>
               )}
             </View>
+            <MaterialCommunityIcons
+              color={colors.medium}
+              name="chevron-down"
+              size={25}
+            />
           </View>
         </TouchableHighlight>
       </Swipeable>
@@ -36,6 +47,7 @@ function ListItem({
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
+    alignItems: "center",
     padding: 15,
     backgroundColor: colors.white,
   },
@@ -45,6 +57,7 @@ const styles = StyleSheet.create({
     borderRadius: 35,
   },
   detailsContainer: {
+    flex: 1,
     marginLeft: 10,
     justifyContent: "center",
   },
